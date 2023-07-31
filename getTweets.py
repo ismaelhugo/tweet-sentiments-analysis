@@ -19,14 +19,14 @@ driver.find_element(By.XPATH, '//*[@id="layers"]/div[2]/div/div/div/div/div/div[
 time.sleep(5)
 
 searchElement = driver.find_element(By.XPATH, '//*[@id="react-root"]/div/div/div[2]/main/div/div/div/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/form/div[1]/div/div/div/label/div[2]/div/input')
-searchElement.send_keys("coleção são joao farm")
+searchElement.send_keys("nova coleção farm")
 searchElement.send_keys(Keys.RETURN)
 
 time.sleep(3)
 
 Tweets=[]
 
-no_of_pagedowns = 20
+no_of_pagedowns = 30
 elem = driver.find_element(By.XPATH, "html/body")
 
 while no_of_pagedowns:
@@ -34,11 +34,11 @@ while no_of_pagedowns:
     time.sleep(1)
     no_of_pagedowns-=1
 
-time.sleep(5)
+time.sleep(10)
 
-articles = driver.find_elements(By.XPATH,"//article[@data-testid='tweet']")
+articles = driver.find_elements(By.XPATH,"//*[@data-testid='tweet']")
 
-time.sleep(20)
+time.sleep(50)
 Tweets = []
 
 for article in articles:
@@ -52,13 +52,13 @@ def salvar_tweets_em_arquivo(tweets, nome_arquivo):
         # Verificar se o arquivo já existe e adicioná-los ao final
         with open(nome_arquivo, 'a') as arquivo:
             for tweet in tweets:
-                arquivo.write(tweet + "\n")  # Adicionar cada tweet ao arquivo
+                arquivo.write(tweet + "\n \n")  # Adicionar cada tweet ao arquivo
         print("Tweets salvos com sucesso no arquivo.")
     except FileNotFoundError:
         # Se o arquivo não existir, criar um novo e salvar os tweets
         with open(nome_arquivo, 'w') as arquivo:
             for tweet in tweets:
-                arquivo.write(tweet + "\n")  # Adicionar cada tweet ao arquivo
+                arquivo.write(tweet + "\n \n")  # Adicionar cada tweet ao arquivo
         print("Arquivo criado e tweets salvos com sucesso.")
 
 nome_arquivo = "tweets.txt"
