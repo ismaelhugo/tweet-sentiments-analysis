@@ -9,7 +9,10 @@ def chatbot():
 
     messages = []
 
-    tweet = "O site da farm é muito bugado kkkkk q ódio; Entrei no site da farm e me endividei legal; eu amei as suas fotos; esse é um tweet neutro não amo nem odeio; estou com ódio dessa empresa"
+    with open("testTweets.txt", "r") as arquivo:
+       tweet = arquivo.read()
+
+    #tweet = "O site da farm é muito bugado kkkkk q ódio; Entrei no site da farm e me endividei legal; eu amei as suas fotos; esse é um tweet neutro não amo nem odeio; estou com ódio dessa empresa"
 
     messages.append({"role": "user", "content": "Classifique esses tweets em positivo, negativo e neutro para uma marca e retorne em um json com as chaves texto e classificacao:" + tweet})
 
@@ -33,7 +36,7 @@ def chatbot():
     quant_neu = 0
      
     try:
-        for i in range(5):
+        for i in range(50):
            if data_dict[i]['classificacao'] == "positivo":
              quant_pos = quant_pos + 1
            elif data_dict[i]['classificacao'] == "negativo":
@@ -41,13 +44,17 @@ def chatbot():
            else:
              quant_neu = quant_neu + 1
     except:
-        for i in range(5):
+        for i in range(50):
            if data_dict['tweets'][i]['classificacao'] == "positivo":
              quant_pos = quant_pos + 1
            elif data_dict['tweets'][i]['classificacao'] == "negativo":
              quant_neg = quant_neg + 1
            else:
              quant_neu = quant_neu + 1
+
+    print(quant_pos)
+    print(quant_neg)
+    print(quant_neu)
 
     labels = "Positivo", "Negativo", "Neutro"
     sizes = [quant_pos, quant_neg, quant_neu]
