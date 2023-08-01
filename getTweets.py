@@ -5,6 +5,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 
+searchBrand = input("Digite o termo da busca do twitter: ")
+searchBrandNoLinks = searchBrand + '-filter:links'
+
 driver = webdriver.Chrome()
 driver.maximize_window()
 driver.get('https://twitter.com/')
@@ -19,33 +22,29 @@ driver.find_element(By.XPATH, '//*[@id="layers"]/div[2]/div/div/div/div/div/div[
 time.sleep(5)
 
 searchElement = driver.find_element(By.XPATH, '//*[@id="react-root"]/div/div/div[2]/main/div/div/div/div[2]/div/div[2]/div/div/div/div[1]/div/div/div/form/div[1]/div/div/div/label/div[2]/div/input')
-searchElement.send_keys("nova coleção farm")
+searchElement.send_keys(searchBrandNoLinks)
 searchElement.send_keys(Keys.RETURN)
 
 time.sleep(3)
 
 Tweets=[]
 
-no_of_pagedowns = 30
+no_of_pagedowns = 100
 elem = driver.find_element(By.XPATH, "html/body")
+Tweets = []
 
 while no_of_pagedowns:
     elem.send_keys(Keys.PAGE_DOWN)
-    time.sleep(1)
-    no_of_pagedowns-=1
-
-time.sleep(10)
-
-articles = driver.find_elements(By.XPATH,"//*[@data-testid='tweet']")
-
-time.sleep(50)
-Tweets = []
-
-for article in articles:
-    Tweets.append(article.text)
-    print("OK")
-
-time.sleep(10)
+    try:
+        articles = driver.find_elements(By.XPATH,"//*[@data-testid='tweet']")
+        for article in articles:
+            if article not in Tweets and len(Tweets) < 100:
+                Tweets.append(article.text)
+            
+        no_of_pagedowns-=1
+        print(Tweets)
+    except:
+        no_of_pagedowns-=1
 
 def salvar_tweets_em_arquivo(tweets, nome_arquivo):
     try:
@@ -63,9 +62,9 @@ def salvar_tweets_em_arquivo(tweets, nome_arquivo):
 
 nome_arquivo = "tweets.txt"
 
-time.sleep(10)
+time.sleep(5)
 
 # Chamando a função para salvar os tweets no arquivo
 salvar_tweets_em_arquivo(Tweets, nome_arquivo)
 
-time.sleep(10)
+time.sleep(2)

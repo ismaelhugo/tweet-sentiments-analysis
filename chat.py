@@ -12,8 +12,6 @@ def chatbot():
     with open("testTweets.txt", "r") as arquivo:
        tweet = arquivo.read()
 
-    #tweet = "O site da farm é muito bugado kkkkk q ódio; Entrei no site da farm e me endividei legal; eu amei as suas fotos; esse é um tweet neutro não amo nem odeio; estou com ódio dessa empresa"
-
     messages.append({"role": "user", "content": "Classifique esses tweets em positivo, negativo e neutro para uma marca e retorne em um json com as chaves texto e classificacao:" + tweet})
 
     # Request gpt-3.5-turbo for chat completion
