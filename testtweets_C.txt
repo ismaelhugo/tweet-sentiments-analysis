@@ -1,3 +1,6 @@
+RESULTADOS:
+Classificação manual: 22 positivos, 17 negativos e 11 neutros.
+
 1. Negativo - "a farm foi de um mau gosto absurdo com essa coleção de sao joao eles tao achando que é carnaval é"
 2. Negativo - "Depois que vi a tenebrosa e cafona coleção da #farm e o péssimo vídeo de divulgação, tenho um pedido ao presidente @LulaOficial: sudestino ser PROIBIDO de fazer qualquer coisa em alusão ao São João."
 3. Neutro - "São João ou Carnaval? Nova coleção de marca carioca gera polêmica"
